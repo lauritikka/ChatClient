@@ -7,7 +7,7 @@ function readMessage() {
     document.getElementById("text-field").value = "";
 
     console.log (message);
-    var name = document.getElementById("text-field2").value.trim();
+    var name = document.getElementById("name-field").value.trim();
 
     var jsonData = {
         "name": name,
