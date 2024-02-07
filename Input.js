@@ -17,7 +17,7 @@ function sendMessage() {
 
     document.getElementById("text-field").value = "";
 
-    socket.send(message);
+    socket.send(jsonString);
 }
 
 socket.onmessage = function (message) {
