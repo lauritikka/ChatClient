@@ -25,6 +25,7 @@ body {
     border: none;
     outline: none;
     padding-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 button {
@@ -35,7 +36,11 @@ button {
     border: none;
     outline: none;
     margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: lightskyblue;
+    font-family:Arial, Helvetica, sans-serif
 }
 
 #message-container {
@@ -70,6 +75,7 @@ button {
     border: none;
     outline: none;
     padding-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 p {
@@ -84,5 +90,6 @@ p {
     align-items: center;
     border-radius: 10px;
     text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
     
 }
