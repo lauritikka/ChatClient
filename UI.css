@@ -75,8 +75,8 @@ button {
     border-radius: 20px;
     border: none;
     outline: none;
-    padding-left: 10px;
     font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
 }
 
 .name {
@@ -86,10 +86,10 @@ button {
     height: 23px;
     display: flex;
     justify-content: center;
-    padding-left: 10px;
-    padding-right: 10px;
     align-items: center;
     border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
     font-family: Arial, Helvetica, sans-serif;
     margin-bottom: -14px;
     color: white;
@@ -98,18 +98,14 @@ button {
 
 .message {
     background-color: transparent;
-    border: solid;
-    border-width: 2px;
-    border-color: lightgray;
     width: min-content;
     min-width: 400px;
-    height: 50px;
+    height: 30px;
     display: flex;
     justify-content:left;
     padding-left: 10px;
     padding-right: 10px;
     align-items: center;
-    border-radius: 20px;
     text-align: left;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -117,24 +113,30 @@ button {
 .timeStamp {
     background-color: transparent;
     width: min-content;
-    min-width: 40px;
+    
     height: 23px;
     display: flex;
     justify-content: center;
-    padding-left: 10px;
-    padding-right: 10px;
     align-items: center;
     border-radius: 5px;
     font-family: Arial, Helvetica, sans-serif;
-<<<<<<< HEAD
-    margin-top: -12px;
+    margin-top: -18px;
     color: black;
-=======
-    margin-bottom: -14px;
-    color: white;
+    font-size:small;
+    float: right;
 }
 
 .innerMessageContainer {
-    background-color: blueviolet;
->>>>>>> b15b1e6 (inner container)
+    background-color: transparent;
+    border: solid;
+    border-width: 2px;
+    border-color: lightgray;
+    width: min-content;
+    min-height: 30px;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    margin-bottom: 30px;
 }
+
