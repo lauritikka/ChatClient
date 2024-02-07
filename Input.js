@@ -1,8 +1,11 @@
 const socket = new WebSocket('ws://192.168.0.12:6969');
 
 
-function sendMessage() {
+// Read name and message from inputs
+function readMessage() {
     var message = document.getElementById("text-field").value;
+    document.getElementById("text-field").value = "";
+
     console.log (message);
     var name = document.getElementById("text-field2").value;
 
@@ -11,24 +14,34 @@ function sendMessage() {
         "message": message
     };
 
-    var jsonString = JSON.stringify(jsonData);
-    console.log(jsonString);
-
-    document.getElementById("text-field").value = "";
-
-    socket.send(jsonString);
+    return jsonData
 }
 
-socket.onmessage = function (message) {
-    
-    var messageContainer = document.getElementById("message-container");
-    const newMessage = document.createElement('p');
-    newMessage.textContent = message.data;
-    console.log (message.data);
-    messageContainer.appendChild(newMessage);
-    messageContainer.scrollTop = messageContainer.scrollHeight;
+// Send message to server 
+function sendMessage() {
+    var messageJson = readMessage();
+    socket.send(JSON.stringify(messageJson));
 }
 
+// Handle received messages
+socket.onmessage = function (event) {
+
+    try {
+        var json = JSON.parse(event.data);
+
+        var messageContainer = document.getElementById("message-container");
+        const newMessage = document.createElement('p');
+
+        newMessage.textContent = JSON.stringify(json);
+        messageContainer.appendChild(newMessage);
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+
+    } catch(error) {
+        console.error("Failed to parse message: ", error);
+    }
+}
+
+// Send messages when user presses enter
 document.body.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         sendMessage();
