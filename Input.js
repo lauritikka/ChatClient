@@ -31,10 +31,18 @@ socket.onmessage = function (event) {
 
         var messageContainer = document.getElementById("message-container");
 
-        const newMessage = document.createElement('p');
+        var message = document.createElement('p');
+        message.setAttribute("class", "message");
 
-        newMessage.textContent = json.name + ": " + json.message;
-        messageContainer.appendChild(newMessage);
+        var name = document.createElement('p');
+        name.setAttribute("class", "name");
+
+        name.textContent = json.name;
+        message.textContent = json.message;
+
+        messageContainer.appendChild(name);
+        messageContainer.appendChild(message);
+
         messageContainer.scrollTop = messageContainer.scrollHeight;
 
     } catch(error) {

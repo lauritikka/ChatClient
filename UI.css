@@ -72,7 +72,21 @@ button {
     padding-left: 10px;
 }
 
-p {
+.name {
+    background-color: lightskyblue;
+    width: min-content;
+    min-width: 100px;
+    height: 12px;
+    display: flex;
+    justify-content:left;
+    padding-left: 10px;
+    padding-right: 10px;
+    align-items: center;
+    border-radius: 10px;
+    text-align: left;
+    
+}
+.message {
     background-color: lightskyblue;
     width: min-content;
     min-width: 400px;
