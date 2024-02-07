@@ -35,38 +35,65 @@ function sendMessage() {
     }
 }
 
+function handlePeerInfo(info) {
+
+    var peers = info.peers;
+
+    if (peers.length === 0) {
+        return;
+    }
+
+    var nameContainer = document.getElementById("name-container");
+    for (var i = 0; i < peers.length; i++) {
+        const name = peers[i];
+        var nameElement = document.createElement('p');
+        nameElement.setAttribute('class', 'nameContainer');
+        nameElement.textContent = name;
+        nameContainer.appendChild(nameElement);
+    }
+}
+
+function handleMessage(json) {
+    var messageContainer = document.getElementById("message-container");
+
+    var innerMessageContainer = document.createElement('div');
+    innerMessageContainer.setAttribute('class', 'innerMessageContainer')
+
+    var message = document.createElement('p');
+    message.setAttribute("class", "message");
+
+    var name = document.createElement('p');
+    name.setAttribute("class", "name");
+
+    var timestamp = document.createElement('p');
+    timestamp.setAttribute("class", "timeStamp");
+
+    var date = new Date(json.timeStamp);
+
+    name.textContent = json.name;
+    message.textContent = json.message;
+    timestamp.textContent = ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
+
+    innerMessageContainer.appendChild(name);
+    innerMessageContainer.appendChild(message);
+    innerMessageContainer.appendChild(timestamp);
+    messageContainer.appendChild(innerMessageContainer);
+
+    messageContainer.scrollTop = messageContainer.scrollHeight;
+}
+
 // Handle received messages
 socket.onmessage = function (event) {
 
     try {
         var json = JSON.parse(event.data);
-
-        var messageContainer = document.getElementById("message-container");
-
-        var innerMessageContainer = document.createElement('div');
-        innerMessageContainer.setAttribute('class', 'innerMessageContainer')
-
-        var message = document.createElement('p');
-        message.setAttribute("class", "message");
-
-        var name = document.createElement('p');
-        name.setAttribute("class", "name");
-
-        var timestamp = document.createElement('p');
-        timestamp.setAttribute("class", "timeStamp");
-
-        var date = new Date(json.timeStamp);
-
-        name.textContent = json.name;
-        message.textContent = json.message;
-        timestamp.textContent = ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
-
-        innerMessageContainer.appendChild(name);
-        innerMessageContainer.appendChild(message);
-        innerMessageContainer.appendChild(timestamp);
-        messageContainer.appendChild(innerMessageContainer);
-
-        messageContainer.scrollTop = messageContainer.scrollHeight;
+        
+        if ('peers' in json) {
+            handlePeerInfo(json);
+        }
+        else {
+            handleMessage(json);
+        }
 
     } catch(error) {
         console.error("Failed to parse message: ", error);
