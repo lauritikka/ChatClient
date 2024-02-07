@@ -30,7 +30,7 @@ button {
 }
 
 #message-container {
-    position: fixed;
+    position: absolute;
     top: 100px;
     left: 50%;
     transform: translateX(-50%);
@@ -40,10 +40,18 @@ button {
     overflow-y: scroll; 
 }
 
-#message {
-    height: 30px;
+#id-container {
+    position: absolute;
+    left: 50%;
+    top: 40px;
+    transform: translateX(-50%);
     width: 400px;
-    background-color: beige;
+    height: 40px;
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 
