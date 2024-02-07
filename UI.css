@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+#input-container {
+    position:absolute;
+    top: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+    height: 60px;
+    width: 400px;
+}
+
+#text-field {
+    background-color: white;
+    height: 30px;
+    width: 250px;
+}
+
+button {
+    height: 34px;
+    width: 60px;
+    cursor: pointer;
+}
+
+#chat-container {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1500px; 
+    height: 1000px;
+    background-color: lightgray; 
+}
