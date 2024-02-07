@@ -10,6 +10,7 @@ function sendMessage() {
 }
 
 
+// Send message
 socket.onmessage = function (message) {
     var messageContainer = document.getElementById("message-container");
     const newMessage = document.createElement('p');
@@ -19,3 +20,8 @@ socket.onmessage = function (message) {
     messageContainer.scrollTop = messageContainer.scrollHeight;
 }
 
+document.body.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        sendMessage();
+    }
+});
