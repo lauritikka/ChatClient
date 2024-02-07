@@ -20,3 +20,8 @@ socket.onmessage = function (message) {
     messageContainer.appendChild(newMessage);
 }
 
+document.body.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        sendMessage();
+    }
+});
