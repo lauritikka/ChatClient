@@ -36,7 +36,8 @@ button {
     transform: translateX(-50%);
     width: 1500px; 
     height: 1000px;
-    background-color: lightgray; 
+    background-color: lightgray;
+    overflow-y: scroll; 
 }
 
 #message {
@@ -44,3 +45,5 @@ button {
     width: 400px;
     background-color: beige;
 }
+
+
