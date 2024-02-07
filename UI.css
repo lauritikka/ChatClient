@@ -12,21 +12,30 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: gray;
+    background-color: white;
     height: 60px;
     width: 400px;
 }
 
 #text-field {
-    background-color: white;
-    height: 30px;
-    width: 250px;
+    background-color: lightgray;
+    height: 40px;
+    width: 350px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    padding-left: 10px;
 }
 
 button {
-    height: 34px;
-    width: 60px;
+    height: 40px;
+    width: 70px;
     cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    margin-left: 5px;
+    background-color: lightskyblue;
 }
 
 #message-container {
@@ -36,22 +45,42 @@ button {
     transform: translateX(-50%);
     width: 1500px; 
     height: 1000px;
-    background-color: lightgray;
+    background-color: white;
     overflow-y: scroll; 
 }
 
 #id-container {
     position: absolute;
     left: 50%;
-    top: 40px;
+    top: 20px;
     transform: translateX(-50%);
     width: 400px;
-    height: 40px;
-    background-color: gray;
+    height: 70px;
+    background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
 
+}
+
+#text-field2 {
+    background-color: lightgray;
+    height: 30px;
+    width: 200px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+}
+
+p {
+    background-color: lightskyblue;
+    width: 400px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
 }
 
 

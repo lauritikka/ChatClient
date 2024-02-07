@@ -6,8 +6,6 @@ function sendMessage() {
     console.log (message);
     var name = document.getElementById("text-field2").value;
 
-
-
     var jsonData = {
         "name": name,
         "message": message
@@ -22,6 +20,7 @@ function sendMessage() {
 }
 
 socket.onmessage = function (message) {
+    
     var messageContainer = document.getElementById("message-container");
     const newMessage = document.createElement('p');
     newMessage.textContent = message.data;
