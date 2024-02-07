@@ -59,7 +59,7 @@ socket.onmessage = function (event) {
 
         name.textContent = json.name;
         message.textContent = json.message;
-        timestamp.textContent = date.getHours() + ":" + date.getMinutes();
+        timestamp.textContent = ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
 
         innerMessageContainer.appendChild(name);
         innerMessageContainer.appendChild(message);

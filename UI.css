@@ -120,6 +120,7 @@ button {
     align-items: center;
     border-radius: 5px;
     font-family: Arial, Helvetica, sans-serif;
+<<<<<<< HEAD
     margin-top: -18px;
     color: black;
     font-size:small;
@@ -140,3 +141,13 @@ button {
     margin-bottom: 30px;
 }
 
+=======
+    margin-bottom: -14px;
+    color: white;
+}
+
+.innerMessageContainer {
+    background-color: blueviolet;
+    width: min-content;
+}
+>>>>>>> a25216f (time displays right)
