@@ -7,6 +7,14 @@ function sendMessage() {
     var name = document.getElementById("text-field2").value;
     console.log (name);
 
+    var jsonData = {
+        "name": name,
+        "message": message
+    };
+
+    var jsonString = JSON.stringify(jsonData);
+    console.log(jsonString);
+
     document.getElementById("text-field").value = "";
 
     socket.send(message);
