@@ -43,6 +43,9 @@ socket.onmessage = function (event) {
 
         var messageContainer = document.getElementById("message-container");
 
+        var innerMessageContainer = document.createElement('div');
+        innerMessageContainer.setAttribute('class', 'innerMessageContainer')
+
         var message = document.createElement('p');
         message.setAttribute("class", "message");
 
@@ -58,9 +61,10 @@ socket.onmessage = function (event) {
         message.textContent = json.message;
         timestamp.textContent = date.getHours() + ":" + date.getMinutes();
 
-        messageContainer.appendChild(name);
-        messageContainer.appendChild(message);
-        messageContainer.appendChild(timestamp);
+        innerMessageContainer.appendChild(name);
+        innerMessageContainer.appendChild(message);
+        innerMessageContainer.appendChild(timestamp);
+        messageContainer.appendChild(innerMessageContainer);
 
         messageContainer.scrollTop = messageContainer.scrollHeight;
 

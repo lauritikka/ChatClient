@@ -126,6 +126,15 @@ button {
     align-items: center;
     border-radius: 5px;
     font-family: Arial, Helvetica, sans-serif;
+<<<<<<< HEAD
     margin-top: -12px;
     color: black;
+=======
+    margin-bottom: -14px;
+    color: white;
+}
+
+.innerMessageContainer {
+    background-color: blueviolet;
+>>>>>>> b15b1e6 (inner container)
 }
