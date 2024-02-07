@@ -12,6 +12,7 @@ function sendMessage() {
 }
 
 
+// Send message
 socket.onmessage = function (message) {
     var messageContainer = document.getElementById("message-container");
     const newMessage = document.createElement('p');
