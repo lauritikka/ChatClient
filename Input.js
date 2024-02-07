@@ -30,9 +30,10 @@ socket.onmessage = function (event) {
         var json = JSON.parse(event.data);
 
         var messageContainer = document.getElementById("message-container");
+
         const newMessage = document.createElement('p');
 
-        newMessage.textContent = JSON.stringify(json);
+        newMessage.textContent = json.name + ": " + json.message;
         messageContainer.appendChild(newMessage);
         messageContainer.scrollTop = messageContainer.scrollHeight;
 
