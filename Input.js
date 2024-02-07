@@ -7,7 +7,11 @@ function readMessage() {
     document.getElementById("text-field").value = "";
 
     console.log (message);
+<<<<<<< HEAD
     var name = document.getElementById("name-field").value.trim();
+=======
+    var name = document.getElementById("text-field2").value.trim().replace(/[^a-zA-Z0-9_äöÄÖ]/g, '');
+>>>>>>> 9598f66 (timestamps work)
 
     var jsonData = {
         "name": name,
@@ -49,11 +53,18 @@ socket.onmessage = function (event) {
         var name = document.createElement('p');
         name.setAttribute("class", "name");
 
+        var timestamp = document.createElement('p');
+        timestamp.setAttribute("class", "timeStamp");
+
+        var date = new Date(json.timeStamp);
+
         name.textContent = json.name;
         message.textContent = json.message;
+        timestamp.textContent = date.getHours() + ":" + date.getMinutes();
 
         messageContainer.appendChild(name);
         messageContainer.appendChild(message);
+        messageContainer.appendChild(timestamp);
 
         messageContainer.scrollTop = messageContainer.scrollHeight;
 

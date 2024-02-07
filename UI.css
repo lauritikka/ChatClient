@@ -112,5 +112,24 @@ button {
     border-radius: 20px;
     text-align: left;
     font-family: Arial, Helvetica, sans-serif;
+<<<<<<< HEAD
 
+=======
+}
+
+.timeStamp {
+    background-color: #00a3cd;
+    width: min-content;
+    min-width: 40px;
+    height: 23px;
+    display: flex;
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    align-items: center;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: -14px;
+    color: white;
+>>>>>>> 9598f66 (timestamps work)
 }
