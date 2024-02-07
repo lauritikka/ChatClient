@@ -3,24 +3,36 @@ const socket = new WebSocket('ws://192.168.0.12:6969');
 
 // Read name and message from inputs
 function readMessage() {
-    var message = document.getElementById("text-field").value;
+    var message = document.getElementById("text-field").value.trim();
     document.getElementById("text-field").value = "";
 
     console.log (message);
-    var name = document.getElementById("text-field2").value;
+    var name = document.getElementById("text-field2").value.trim();
 
     var jsonData = {
         "name": name,
         "message": message
     };
 
+    if (name.length === 0) {
+        throw new Error("Name can't be empty");
+    }
+    else if (message.length === 0){
+        throw new Error("Message can't be empty");
+    }
+
     return jsonData
 }
 
 // Send message to server 
 function sendMessage() {
-    var messageJson = readMessage();
-    socket.send(JSON.stringify(messageJson));
+    try {
+        var messageJson = readMessage();
+        socket.send(JSON.stringify(messageJson));
+    }
+    catch (error) {
+        alert(error.message);
+    }
 }
 
 // Handle received messages
