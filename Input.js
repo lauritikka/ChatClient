@@ -7,11 +7,7 @@ function readMessage() {
     document.getElementById("text-field").value = "";
 
     console.log (message);
-<<<<<<< HEAD
-    var name = document.getElementById("name-field").value.trim();
-=======
-    var name = document.getElementById("text-field2").value.trim().replace(/[^a-zA-Z0-9_äöÄÖ]/g, '');
->>>>>>> 9598f66 (timestamps work)
+    var name = document.getElementById("name-field").value.trim().replace(/[^a-zA-Z0-9_äöÄÖ]/g, '');
 
     var jsonData = {
         "name": name,
