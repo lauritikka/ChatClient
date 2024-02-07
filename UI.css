@@ -29,7 +29,7 @@ button {
     cursor: pointer;
 }
 
-#chat-container {
+#message-container {
     position: fixed;
     top: 100px;
     left: 50%;
@@ -37,4 +37,10 @@ button {
     width: 1500px; 
     height: 1000px;
     background-color: lightgray; 
+}
+
+#message {
+    height: 30px;
+    width: 400px;
+    background-color: beige;
 }
