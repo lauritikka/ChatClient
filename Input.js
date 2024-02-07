@@ -5,7 +5,8 @@ function sendMessage() {
     var message = document.getElementById("text-field").value;
     console.log (message);
     var name = document.getElementById("text-field2").value;
-    console.log (name);
+
+
 
     var jsonData = {
         "name": name,
