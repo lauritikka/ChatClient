@@ -44,6 +44,25 @@ button {
     color: white;
 }
 
+.image-button {
+    /* Set the background image */
+    background-image: url('path/to/your/image.png');
+    
+    /* Set the width and height of the button */
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+  
+    /* Make sure the button has no border and no background color */
+    border: none;
+    background-color: transparent;
+  
+    /* Ensure the background image covers the button */
+    background-size: cover;
+  
+    /* Add cursor pointer to indicate it's clickable */
+    cursor: pointer;
+  }
+
 #message-container {
     position: absolute;
     top: 100px;
@@ -51,7 +70,7 @@ button {
     transform: translateX(-50%);
     width: 1500px; 
     height: 1000px;
-    background-color: ;
+    background-color: #191919 ;
     overflow-y: scroll; 
 }
 
