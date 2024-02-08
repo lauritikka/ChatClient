@@ -142,6 +142,11 @@ handle_request(
                 return res;
             };
 
+    std::cout << "Request fields" << std::endl;
+    for (const auto& field : req) {
+        std::cout << field.name() << " : " << field.value() << std::endl;
+    }
+
 
     // Make sure we can handle the method
     if( req.method() != http::verb::get &&

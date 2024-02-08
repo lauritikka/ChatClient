@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
     auto const address = net::ip::make_address("0.0.0.0");
     auto const wsPort = static_cast<unsigned short>(6969);
     const auto httpPort = static_cast<unsigned short>(8080);
-    const auto docRoot = ".";
+    const auto docRoot = "../../";
 
     // The io_context is required for all I/O
     net::io_context ioc;
