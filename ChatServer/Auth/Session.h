@@ -9,9 +9,11 @@
 #include "../Common.h"
 #include "../Fail.h"
 #include "boost/beast/http.hpp"
-
+#include "LoginForm.h"
 
 namespace http = boost::beast::http;
+
+
 
 
 // Return a reasonable mime type based on the extension of a file.
@@ -77,6 +79,7 @@ path_cat(
     return result;
 }
 
+
 // Return a response for the given request.
 //
 // The concrete type of the response message (which depends on the
@@ -113,6 +116,19 @@ handle_request(
                 return res;
             };
 
+    auto const login_successful =
+            [&req]()
+            {
+                http::response<http::string_body> res{http::status::accepted, req.version()};
+                res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
+                res.set(http::field::content_type, "text/html");
+                res.set(http::field::cookie, "id=69420");
+                res.keep_alive(req.keep_alive());
+                res.body() = "Login successful!";
+                res.prepare_payload();
+                return res;
+            };
+
     // Returns a server error response
     auto const server_error =
             [&req](beast::string_view what)
@@ -129,8 +145,19 @@ handle_request(
 
     // Make sure we can handle the method
     if( req.method() != http::verb::get &&
+        req.method() != http::verb::post &&
         req.method() != http::verb::head)
         return bad_request("Unknown HTTP-method");
+
+    if (req.method() == http::verb::post)
+    {
+        const std::string& body = req.body();
+
+        LoginForm lf(body);
+
+
+        return login_successful();
+    }
 
     // Request path must be absolute and not contain "..".
     if( req.target().empty() ||
@@ -142,6 +169,7 @@ handle_request(
     std::string path = path_cat(doc_root, req.target());
     if(req.target().back() == '/')
         path.append("index.html");
+
 
     // Attempt to open the file
     beast::error_code ec;
@@ -169,6 +197,8 @@ handle_request(
         res.keep_alive(req.keep_alive());
         return res;
     }
+
+
 
     // Respond to GET request
     http::response<http::file_body> res{
@@ -247,8 +277,6 @@ namespace Auth
 
             if(ec)
                 return fail(ec, "read");
-
-            std::cout << "Received request: " << req_.body() << std::endl;
 
             // Send the response
             send_response(
