@@ -7,6 +7,7 @@
 
 #include <string>
 #include <functional>
+#include <boost/functional/hash.hpp>
 
 struct User
 {
@@ -19,22 +20,20 @@ struct User
         name = std::string(rb.begin() + nameStart, rb.begin() + separator);
         password = std::string(rb.begin() + passStart, rb.end());
     }
+    User(std::string name, std::string password)
+    : name{std::move(name)}, password{std::move(password)}
+    {}
+
+    bool operator==(const User& rhs) const {
+        return name == rhs.name && password == rhs.password;
+    }
+
     std::string name;
     std::string password;
 };
 
-std::ostream& operator << (std::ostream& os, const User& lf)
-{
-    os << "Name: " << lf.name << '\n' << "Password: " << lf.password;
-    return os;
-}
+std::ostream& operator << (std::ostream& os, const User& lf);
 
-std::size_t hash(const User& lf)
-{
-    std::hash<std::string> hash_fn;
-    std::size_t hashValue = hash_fn(lf.name);
-    boost::hash_combine(hashValue, hash_fn(lf.password));
-    return hashValue;
-}
+std::size_t hash(const User& lf);
 
 #endif //CHATSERVER_USER_H

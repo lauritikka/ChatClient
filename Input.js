@@ -1,11 +1,5 @@
 const socket = new WebSocket('ws://192.168.1.24:6969');
-<<<<<<< HEAD
 
-function getCookieJson(){
-    return JSON.parse(document.cookie);
-}
-=======
->>>>>>> 925edab (Username, cookies and own message styling.)
 
 function getCookieJson() {
     return JSON.parse(document.cookie);

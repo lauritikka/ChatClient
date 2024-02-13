@@ -12,6 +12,8 @@
 #include "User.h"
 #include <fmt/format.h>
 #include <nlohmann/json.hpp>
+#include "Db.h"
+#include <algorithm>
 
 namespace http = boost::beast::http;
 
@@ -145,6 +147,18 @@ handle_request(
                 return res;
             };
 
+    auto const register_failed =
+            [&req]()
+            {
+                http::response<http::string_body> res{http::status::accepted, req.version()};
+                res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
+                res.set(http::field::content_type, "text/html");
+                res.keep_alive(req.keep_alive());
+                res.body() = "Register failed!";
+                res.prepare_payload();
+                return res;
+            };
+
     // Returns a server error response
     auto const server_error =
             [&req](beast::string_view what)
@@ -180,7 +194,13 @@ handle_request(
             const std::string &body = req.body();
             User user(body);
             auto uid = hash(user);
-            return register_successful(uid);
+            const std::vector<User>& users = Db::instance().getUsers();
+            if (std::find(users.begin(), users.end(), user) != users.end()) {
+                return register_successful(uid);
+            }
+            else {
+                return register_failed();
+            }
         }
     }
 
