@@ -19,6 +19,7 @@ function readMessage() {
     return jsonData
 }
 
+
 // Send message to server 
 function sendMessage() {
     try {
