@@ -14,8 +14,7 @@
 
 namespace Chat
 {
-
-// Accepts incoming connections and launches the sessions
+    // Accepts incoming connections and launches the sessions
     class listener : public std::enable_shared_from_this<listener>
     {
         net::io_context &ioc_;

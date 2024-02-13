@@ -5,6 +5,7 @@
 #include "Session.h"
 #include <nlohmann/json.hpp>
 
+
 void Room::addParticipant(Participant participant)
 {
     mParticipants.insert(participant);
