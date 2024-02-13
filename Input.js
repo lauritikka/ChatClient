@@ -1,22 +1,17 @@
 const socket = new WebSocket('ws://192.168.0.12:6969');
 
 
-// Read name and message from inputs
+// Read message from input
 function readMessage() {
     var message = document.getElementById("text-field").value.trim();
     document.getElementById("text-field").value = "";
 
     console.log (message);
-    var name = document.getElementById("name-field").value.trim().replace(/[^a-zA-Z0-9_äöÄÖ]/g, '');
-
+    
     var jsonData = {
-        "name": name,
         "message": message
     };
 
-    if (name.length === 0) {
-        throw new Error("Name can't be empty");
-    }
     else if (message.length === 0){
         throw new Error("Message can't be empty");
     }
@@ -42,15 +37,6 @@ function handlePeerInfo(info) {
     if (peers.length === 0) {
         return;
     }
-
-    var nameContainer = document.getElementById("name-container");
-    for (var i = 0; i < peers.length; i++) {
-        const name = peers[i];
-        var nameElement = document.createElement('p');
-        nameElement.setAttribute('class', 'nameContainer');
-        nameElement.textContent = name;
-        nameContainer.appendChild(nameElement);
-    }
 }
 
 function handleMessage(json) {
@@ -62,19 +48,14 @@ function handleMessage(json) {
     var message = document.createElement('p');
     message.setAttribute("class", "message");
 
-    var name = document.createElement('p');
-    name.setAttribute("class", "name");
-
     var timestamp = document.createElement('p');
     timestamp.setAttribute("class", "timeStamp");
 
     var date = new Date(json.timeStamp);
 
-    name.textContent = json.name;
     message.textContent = json.message;
     timestamp.textContent = ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
 
-    innerMessageContainer.appendChild(name);
     innerMessageContainer.appendChild(message);
     innerMessageContainer.appendChild(timestamp);
     messageContainer.appendChild(innerMessageContainer);
