@@ -1,4 +1,8 @@
-const socket = new WebSocket('ws://192.168.0.12:6969');
+const socket = new WebSocket('ws://192.168.1.24:6969');
+
+function getCookieJson(){
+    return JSON.parse(document.cookie);
+}
 
 
 // Read message from input
@@ -9,6 +13,8 @@ function readMessage() {
     console.log (message);
     
     var jsonData = {
+        "username": getCookieJson()["username"],
+        "userID": getCookieJson()["userID"],
         "message": message
     };
 
