@@ -82,8 +82,8 @@ session::on_read(
     try {
         auto j = nlohmann::json::parse(msg);
 
-        if (j.contains("name")) {
-            mUserName = j["name"];
+        if (j.contains("username")) {
+            mUserName = j["username"];
             auto tmpMsg = deserializeMessage(j);
             auto j2 = serializeMessage(tmpMsg);
             std::cout << "Message: " << j2.dump() << std::endl;

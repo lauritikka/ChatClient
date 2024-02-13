@@ -1,9 +1,19 @@
 const socket = new WebSocket('ws://192.168.1.24:6969');
+<<<<<<< HEAD
 
 function getCookieJson(){
     return JSON.parse(document.cookie);
 }
+=======
+>>>>>>> 925edab (Username, cookies and own message styling.)
 
+function getCookieJson() {
+    return JSON.parse(document.cookie);
+}
+
+function getMyUsername() {
+    return getCookieJson()["username"];
+}
 
 // Read message from input
 function readMessage() {
@@ -24,7 +34,6 @@ function readMessage() {
 
     return jsonData
 }
-
 
 // Send message to server 
 function sendMessage() {
@@ -58,13 +67,18 @@ function handleMessage(json) {
     var timestamp = document.createElement('p');
     timestamp.setAttribute("class", "timeStamp");
 
-    var date = new Date(json.timeStamp);
+    const username = json["username"]; 
+    const date = new Date(json.timeStamp);
 
     message.textContent = json.message;
     timestamp.textContent = ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
 
     innerMessageContainer.appendChild(message);
     innerMessageContainer.appendChild(timestamp);
+    if (username === getMyUsername()) {
+        innerMessageContainer.style.marginLeft = 'auto';
+        innerMessageContainer.style.marginRight = '30px';
+    }
     messageContainer.appendChild(innerMessageContainer);
 
     messageContainer.scrollTop = messageContainer.scrollHeight;
@@ -93,7 +107,6 @@ function makeFakeMessage(fakeMsg) {
 
     messageContainer.scrollTop = messageContainer.scrollHeight;
 }
-
 
 function caller() {
     const chatMessages = [

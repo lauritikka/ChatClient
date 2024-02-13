@@ -9,11 +9,11 @@
 #include "../Common.h"
 #include "../Fail.h"
 #include "boost/beast/http.hpp"
-#include "LoginForm.h"
+#include "User.h"
+#include <fmt/format.h>
+#include <nlohmann/json.hpp>
 
 namespace http = boost::beast::http;
-
-
 
 
 // Return a reasonable mime type based on the extension of a file.
@@ -117,14 +117,30 @@ handle_request(
             };
 
     auto const login_successful =
-            [&req]()
+            [&req](const std::string& username, std::size_t userID)
             {
                 http::response<http::string_body> res{http::status::accepted, req.version()};
                 res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
                 res.set(http::field::content_type, "text/html");
-                res.set(http::field::cookie, "id=69420");
+                res.set(http::field::set_cookie, nlohmann::json {
+                    {"username", username},
+                    {"userID", userID}
+                }.dump());
                 res.keep_alive(req.keep_alive());
                 res.body() = "Login successful!";
+                res.prepare_payload();
+                return res;
+            };
+
+    auto const register_successful =
+            [&req](std::size_t userID)
+            {
+                http::response<http::string_body> res{http::status::accepted, req.version()};
+                res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
+                res.set(http::field::content_type, "text/html");
+                res.set(http::field::set_cookie, nlohmann::json {{"userID", userID}}.dump());
+                res.keep_alive(req.keep_alive());
+                res.body() = "Register successful!";
                 res.prepare_payload();
                 return res;
             };
@@ -142,26 +158,30 @@ handle_request(
                 return res;
             };
 
-    std::cout << "Request fields" << std::endl;
-    for (const auto& field : req) {
-        std::cout << field.name() << " : " << field.value() << std::endl;
-    }
-
+    std::cout << "Cookie: " << req["cookie"] << std::endl;
+    std::cout << "Target: " << req.target() << std::endl;
 
     // Make sure we can handle the method
     if( req.method() != http::verb::get &&
         req.method() != http::verb::post &&
-        req.method() != http::verb::head)
+        req.method() != http::verb::head) {
         return bad_request("Unknown HTTP-method");
+    }
 
-    if (req.method() == http::verb::post)
-    {
-        const std::string& body = req.body();
-
-        LoginForm lf(body);
-
-
-        return login_successful();
+    if (req.method() == http::verb::post) {
+        if (req.target() == "/login") {
+            const std::string &body = req.body();
+            User user(body);
+            auto uid = hash(user);
+            return login_successful(user.name, uid);
+        }
+        else if (req.target() == "/register")
+        {
+            const std::string &body = req.body();
+            User user(body);
+            auto uid = hash(user);
+            return register_successful(uid);
+        }
     }
 
     // Request path must be absolute and not contain "..".
@@ -174,7 +194,6 @@ handle_request(
     std::string path = path_cat(doc_root, req.target());
     if(req.target().back() == '/')
         path.append("index.html");
-
 
     // Attempt to open the file
     beast::error_code ec;
@@ -202,8 +221,6 @@ handle_request(
         res.keep_alive(req.keep_alive());
         return res;
     }
-
-
 
     // Respond to GET request
     http::response<http::file_body> res{

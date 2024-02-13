@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 
     // Create and launch a listening port
     std::make_shared<Chat::listener>(ioc, tcp::endpoint{address, wsPort})->run();
-//    std::make_shared<Auth::Listener>(ioc, tcp::endpoint{address, httpPort}, std::make_shared<std::string>(docRoot))->run();
+    std::make_shared<Auth::Listener>(ioc, tcp::endpoint{address, httpPort}, std::make_shared<std::string>(docRoot))->run();
 
     ioc.run();
 

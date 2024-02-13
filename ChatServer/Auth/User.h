@@ -2,15 +2,15 @@
 // Created by vaige on 8.2.2024.
 //
 
-#ifndef CHATSERVER_LOGINFORM_H
-#define CHATSERVER_LOGINFORM_H
+#ifndef CHATSERVER_USER_H
+#define CHATSERVER_USER_H
 
 #include <string>
 #include <functional>
 
-struct LoginForm
+struct User
 {
-    explicit LoginForm(const std::string& rb)
+    explicit User(const std::string& rb)
     {
         const auto nameStart = rb.find_first_of('=') + 1;
         const auto separator = rb.find_first_of('&');
@@ -23,13 +23,13 @@ struct LoginForm
     std::string password;
 };
 
-std::ostream& operator << (std::ostream& os, const LoginForm& lf)
+std::ostream& operator << (std::ostream& os, const User& lf)
 {
     os << "Name: " << lf.name << '\n' << "Password: " << lf.password;
     return os;
 }
 
-std::size_t hash(const LoginForm& lf)
+std::size_t hash(const User& lf)
 {
     std::hash<std::string> hash_fn;
     std::size_t hashValue = hash_fn(lf.name);
@@ -37,5 +37,4 @@ std::size_t hash(const LoginForm& lf)
     return hashValue;
 }
 
-
-#endif //CHATSERVER_LOGINFORM_H
+#endif //CHATSERVER_USER_H
